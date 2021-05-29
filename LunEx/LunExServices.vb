@@ -1,8 +1,9 @@
+Imports System
 Imports System.Collections.Generic
 
 Namespace ITC
     Public Interface SecurityExchangeTransmissionInterface
-        Function CurrentPrice(symbol As String) As Double
+        Function CurrentPrice(symbol As String) As Integer
     End Interface
 End Namespace
 
@@ -15,24 +16,17 @@ Namespace LunEx
         Implements ITC.SecurityExchangeTransmissionInterface
         Private Shared invisibleHand As New Random()
 
-        Public Overridable Function CurrentPrice(symbol As String) As Double Implements ITC.SecurityExchangeTransmissionInterface.CurrentPrice
-            pause()
+        Public Overridable Function CurrentPrice(symbol As String) As Integer Implements ITC.SecurityExchangeTransmissionInterface.CurrentPrice
+            PauseToEmulateSendReceive()
             If invisibleHand.[Next](100) > 80 Then
                 Throw New LunExServiceUnavailableException()
             End If
-            Dim randomPrice As Double = 42.0 + (invisibleHand.NextDouble() * 2.1)
-            Return truncate(randomPrice)
+            Return 103 + invisibleHand.[Next](20)
         End Function
 
-        Private Sub pause()
+        Private Sub PauseToEmulateSendReceive()
             System.Threading.Thread.Sleep(5000)
         End Sub
-
-        Private Function truncate(original As Double) As Double
-            Dim originalAsString As String = original.ToString()
-            Dim truncatedString As String = originalAsString.Substring(0, 7)
-            Return [Double].Parse(truncatedString)
-        End Function
     End Class
     Public Class LunExServiceUnavailableException
         Inherits Exception
