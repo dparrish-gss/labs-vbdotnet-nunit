@@ -1,8 +1,5 @@
 ﻿Imports LunExService.LunEx
 Public Class Account
-    Public Function TotalGain(ByVal lots As Lot(), symbol As String, service As LunExServices) As Long
-        Return TotalGain(lots, service.CurrentPrice(symbol))
-    End Function
 
     Public Function TotalGain(ByVal lots As Lot(), ByVal currentPrice As Long) As Long
         Dim total As Long = 0
