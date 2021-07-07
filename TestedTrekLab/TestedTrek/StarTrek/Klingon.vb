@@ -17,6 +17,10 @@ Public Class Klingon
         Return _energy
     End Function
 
+    Public Sub TakeDamage(amount As Integer)
+        _energy -= amount
+    End Sub
+
     Public Sub SetEnergy(ByVal e As Integer)
         _energy = e
     End Sub
