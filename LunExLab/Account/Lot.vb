@@ -7,7 +7,7 @@
         Me.Cost = cost
     End Sub
 
-    Public Function GainAt(ByVal currentPrice As Double) As Long
+    Public Function GainAt(ByVal currentPrice As Integer) As Long
         Return (Shares * currentPrice) - Cost
     End Function
 End Class
